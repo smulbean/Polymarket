@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "polymarket-sdk"
+version = "0.1.0"
+description = "Python SDK and CLI wrapper for the Polymarket prediction markets platform"
+requires-python = ">=3.9"
+dependencies = [
+    "click>=8.1",
+    "rich>=13.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4",
+    "pytest-cov>=4.1",
+    "pytest-mock>=3.11",
+]
+
+[project.scripts]
+polymarket-sdk = "cli.main:cli"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["polymarket_sdk*", "cli*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short"
+
+[tool.coverage.run]
+source = ["polymarket_sdk", "cli"]
+omit = ["tests/*"]
+
+[tool.coverage.report]
+show_missing = true
